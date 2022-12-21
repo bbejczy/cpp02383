@@ -6,6 +6,15 @@ using namespace std;
 // Task 1(a).  Implement this function
 Vector **createField(unsigned int m, unsigned int n, Vector v) {
     // Write your code here
+    // initialize Vector
+    Vector **A = new Vector*;
+    for (unsigned int i = 0; i < m; ++i) {
+        for (unsigned int j = 0; j < n; ++j) {
+            A[i][j] = v;
+        }
+    }
+    cout << A << endl;
+    return A;
 }
 
 // Task 1(b).  Implement this function

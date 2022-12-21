@@ -21,19 +21,14 @@ Hotel::Hotel() {
     this->roomOccupancy["Tulip"] = {"Denis Villeneuve", "123xyz"};
 }
 
-bool Hotel::roomExist(string name) {
-    if(find(this->roomNames.begin(), this->roomNames.end(), name) != this->roomNames.end()) {
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
 // Task 3(a).  Implement this method
 void Hotel::addRoom(string name) {
+    bool roomExist = false;
+    if(find(this->roomNames.begin(), this->roomNames.end(), name) != this->roomNames.end()) {
+        roomExist = true;
+    }
 
-    if(this->roomExist(name)==true) {
+    if(roomExist==true) {
         return;
     }
     else{
@@ -45,9 +40,20 @@ void Hotel::addRoom(string name) {
 // Task 3(b).  Implement this method
 void Hotel::addGuest(string roomName, string guestName, string guestId) {
     // Write your code here
+    bool roomExist = false;
+    if(find(this->roomNames.begin(), this->roomNames.end(), roomName) != this->roomNames.end()) {
+        roomExist = true;
+    }
 
-    if(this->roomExist(roomName)==true){
-        if (this->roomOccupancy.find(guestId) != this->roomOccupancy.end()) {
+    if(roomExist==true){
+
+        for (auto g: this->roomOccupancy){
+            if (g.second.id == guestId){
+                return;
+            }
+        }
+
+        if (this->roomOccupancy.find(guestId) == this->roomOccupancy.end()) {
             this->roomOccupancy[roomName] = {guestName, guestId};
             }
     }
@@ -59,7 +65,24 @@ void Hotel::addGuest(string roomName, string guestName, string guestId) {
 
 // Task 3(c).  Implement this method
 void Hotel::findRoomByGuest(string guestName, string guestId) {
-    // Write your code here
+    for (auto r: this->roomNames){
+        if (this->roomOccupancy.find(r) == this->roomOccupancy.end()){
+            continue;
+        }
+
+        Guest g = this->roomOccupancy[r];
+        
+        bool match = true;
+        if (guestName != "*"){
+            match = (g.name == guestName);
+        }
+        if (guestId != "*"){
+            match = match && (g.id == guestId);
+        }
+        if (match){
+            cout << r << endl;
+        }
+    }
 }
 
 // Do not modify

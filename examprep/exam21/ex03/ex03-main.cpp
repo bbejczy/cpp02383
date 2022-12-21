@@ -12,7 +12,7 @@ int main() {
     cout << endl << "After adding room 'Waterlily':" << endl;
     hotel.display();
 
-    hotel.addGuest("Waterlily", "Taika Waititi", "xyz890");
+    hotel.addGuest("Waterlily", "Taika Waititi", "bce111");
     cout << endl << "After adding a guest:" << endl;
     hotel.display();
 
